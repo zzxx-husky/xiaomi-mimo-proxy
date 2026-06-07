@@ -22,19 +22,33 @@ class Logger {
   }
 
   /**
-   * 获取当前日期字符串
+   * 获取当前本地日期字符串
    */
   getDateStr() {
     const now = new Date();
-    return now.toISOString().split('T')[0];
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const day = String(now.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
   }
 
   /**
-   * 获取当前时间字符串
+   * 获取当前本地时间字符串
    */
   getTimeStr() {
     const now = new Date();
-    return now.toISOString();
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const day = String(now.getDate()).padStart(2, '0');
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const seconds = String(now.getSeconds()).padStart(2, '0');
+    const ms = String(now.getMilliseconds()).padStart(3, '0');
+    const offset = -now.getTimezoneOffset();
+    const sign = offset >= 0 ? '+' : '-';
+    const offsetHours = String(Math.floor(Math.abs(offset) / 60)).padStart(2, '0');
+    const offsetMinutes = String(Math.abs(offset) % 60).padStart(2, '0');
+    return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}.${ms}${sign}${offsetHours}:${offsetMinutes}`;
   }
 
   /**
